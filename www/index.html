@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lunara</title>
+  <link rel="shortcut icon" href="assets/img/lunara.ico">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <link rel="stylesheet" href="assets/vendore/texllate/animate.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container">
+    <section id="Oval" class="mb-4">
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+          <div id="loader-wrapper">
+            <div id="loader">
+              <div id="loader1"></div>
+            </div>
+            <p>LUNARA</p>
+          </div>
+
+          <h5 class="text-light text text-center">Ask me anything</h5>
+
+          <!-- 💬 Input Box -->
+          <div class="col-md-12 mt-4 pt-4">
+            <div class="text-center">
+              <div id="textInput" class="d-flex">
+                <input type="text" class="input-field" name="chatbox" id="chatbox" placeholder="Type here ... ">
+                <button id="micBtn" class="glow-on-hover"><i class="bi bi-mic"></i></button>
+                <button id="ChatBtn" class="glow-on-hover" data-bs-toggle="offcanvas"
+                  data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+                  <i class="bi bi-chat-dots"></i>
+                </button>
+                <button id="SettingsBtn" class="glow-on-hover"><i class="bi bi-gear"></i></button>
+              </div>
+            </div>
+          </div>
+          <!-- 💬 Input Box End -->
+        </div>
+        <div class="col-md-1"></div>
+      </div>
+    </section>
+
+    <!-- 🌊 SiriWave Section -->
+    <section id="SiriWave" class="mb-4" hidden>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+              <div>
+                <h5 class="text-start text-light mb-4 lunara-message" style="font-size: 26px; color: white;">
+                  <span>Hii, I am LUNARA</span>
+                </h5>
+
+                <div id="siri-container"></div>
+
+                <!-- 🔮 LUNARA Control Section -->
+                <div class="text-center mt-3">
+                  <button onclick="startLunara()" class="btn btn-primary">Start Lunara</button>
+                  <p id="status" class="text-light mt-2">Lunara is ready...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- 🧠 LUNARA JS Integration -->
+  <script type="text/javascript" src="/eel.js"></script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+  <!-- Lettering.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lettering.js/0.7.0/jquery.lettering.min.js"></script>
+
+  <!-- Textillate.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/textillate/0.4.0/jquery.textillate.min.js"></script>
+
+  <!-- SiriWave -->
+  <script src="https://unpkg.com/siriwave/dist/siriwave.umd.min.js"></script>
+
+  <!-- Your custom JS files -->
+  <script src="main.js"></script>
+  <script src="./controller.js"></script>
+
+  <!-- 🚀 Lunara Control Script -->
+  <script>
+    // Expose function to show messages from Python
+    eel.expose(show_text);
+    function show_text(text) {
+      document.getElementById("status").innerText = text;
+    }
+
+    // Start listening in Python when called
+    function startLunara() {
+      eel.start_lunara();
+    }
+
+    // Optional: mic button also triggers Lunara
+    document.getElementById("micBtn").addEventListener("click", () => {
+      eel.start_lunara();
+    });
+  </script>
+</body>
+</html>
